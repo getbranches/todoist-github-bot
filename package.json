@@ -23,7 +23,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@bjerk/eslint-config": "^2.2.2",
+    "@bjerk/eslint-config": "^3.0.1",
     "@cobraz/prettier": "^2.0.0",
     "@tsconfig/node18-strictest-esm": "^1.0.1",
     "@types/jest": "^29.1.2",
