@@ -42,7 +42,7 @@ jobs:
 
       - name: Build
         run: yarn build
-  
+
   deploy:
     name: Deploy to Cloud Run
     uses: getbranches/conf/.github/workflows/deploy-to-cloud-run.yml@epic-first-install
