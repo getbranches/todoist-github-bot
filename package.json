@@ -21,7 +21,6 @@
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest --coverage src/**/*"
   },
-  "dependencies": {},
   "devDependencies": {
     "@bjerk/eslint-config": "^2.2.2",
     "@cobraz/prettier": "^2.0.0",
