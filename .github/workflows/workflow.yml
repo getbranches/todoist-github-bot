@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - '[0-9]+.x'
+      - epic/3-mvp
     tags:
       - '*'
 
@@ -36,3 +37,12 @@ jobs:
 
       - name: Build
         run: yarn build
+  deploy:
+    uses: getbranches/conf/workflows/deploy-to-cloud-run.yaml@epic-first-install
+    with:
+      docker-registry: ${{ inputs.DOCKER_REPOSITORY }}
+      google-project-id: ${{ secrets.GOOGLE_PROJECT_ID }}
+      workload-identity-provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+      service-account-email: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
+      self-url: https://missing.com/
+      log-level: debug
