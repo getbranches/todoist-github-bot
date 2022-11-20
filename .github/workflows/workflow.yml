@@ -39,12 +39,9 @@ jobs:
         run: yarn build
   
   deploy:
-  
+
     uses: getbranches/conf/.github/workflows/deploy-to-cloud-run.yml@epic-first-install
+    secrets: inherit
     with:
-      docker-registry: ${{ inputs.DOCKER_REPOSITORY }}
-      google-project-id: ${{ secrets.GOOGLE_PROJECT_ID }}
-      workload-identity-provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-      service-account-email: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
       self-url: https://missing.com/
       log-level: debug
