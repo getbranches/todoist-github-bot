@@ -38,7 +38,7 @@ jobs:
       - name: Build
         run: yarn build
   deploy:
-    uses: getbranches/conf/workflows/deploy-to-cloud-run.yaml@epic-first-install
+    uses: getbranches/conf/.github/workflows/deploy-to-cloud-run.yaml@epic-first-install
     with:
       docker-registry: ${{ inputs.DOCKER_REPOSITORY }}
       google-project-id: ${{ secrets.GOOGLE_PROJECT_ID }}
