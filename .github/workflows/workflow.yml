@@ -9,8 +9,13 @@ on:
     tags:
       - '*'
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build:
+    name: Build, Lint, Format and Test
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +44,7 @@ jobs:
         run: yarn build
   
   deploy:
-
+    name: Deploy to Cloud Run
     uses: getbranches/conf/.github/workflows/deploy-to-cloud-run.yml@epic-first-install
     secrets: inherit
     with:
