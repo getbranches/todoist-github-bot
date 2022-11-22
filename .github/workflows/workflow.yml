@@ -49,5 +49,6 @@ jobs:
     secrets: inherit
     with:
       name: ${{ github.event.repository.name }}
+      no-cache: true
       self-url: https://missing.com/
       log-level: debug
