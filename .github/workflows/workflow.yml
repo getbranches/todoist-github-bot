@@ -48,5 +48,6 @@ jobs:
     uses: getbranches/conf/.github/workflows/deploy-to-cloud-run.yml@epic-first-install
     secrets: inherit
     with:
+      name: ${{ github.event.repository.name }}
       self-url: https://missing.com/
       log-level: debug
