@@ -1,0 +1,9 @@
+import { cleanEnv, num, str } from 'envalid';
+
+export const config = cleanEnv(process.env, {
+  PORT: num({ default: 8080 }),
+  LOG_LEVEL: str({
+    default: 'info',
+    choices: ['trace', 'debug', 'info', 'warn', 'error', 'fatal'],
+  }),
+});

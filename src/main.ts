@@ -1,7 +1,4 @@
-export async function main(): Promise<string> {
-  // Fun server / command utility here
+import { makeServer } from './server.js';
 
-  return 'hello';
-}
-
-main();
+const server = await makeServer();
+await server.listen();
