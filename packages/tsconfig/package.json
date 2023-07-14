@@ -1,0 +1,9 @@
+{
+  "name": "tsconfig",
+  "version": "0.0.0",
+  "dependencies": {
+    "@tsconfig/esm": "^1.0.4",
+    "@tsconfig/node-lts": "^18",
+    "@tsconfig/strictest": "^2.0.1"
+  }
+}

@@ -1,42 +1,28 @@
 {
+  "private": true,
   "name": "todoist-github-bot",
-  "exports": "./dist/main.js",
   "type": "module",
-  "volta": {
-    "node": "18.12.0",
-    "yarn": "1.22.19"
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "@simenandre/prettier": "^5.0.0",
+    "eslint": "^8.43.0",
+    "prettier": "^3.0.0",
+    "turbo": "^1.10.6",
+    "tsconfig": "workspace:*"
   },
   "engines": {
     "node": ">=18"
   },
+  "packageManager": "pnpm@8.6.7",
   "prettier": "@simenandre/prettier",
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsx watch src/main.ts",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "lint": "eslint . --ext .ts,.tsx",
-    "test": "vitest"
-  },
-  "devDependencies": {
-    "@bjerk/eslint-config": "^5.0.0",
-    "@simenandre/prettier": "5.0.0",
-    "@tsconfig/esm": "^1.0.4",
-    "@tsconfig/node-lts": "^18.12.3",
-    "@tsconfig/strictest": "^2.0.1",
-    "@types/jest": "^29.5.3",
-    "@types/node": "^20.4.2",
-    "eslint": "^8.44.0",
-    "prettier": "^3.0.0",
-    "tsx": "^3.12.7",
-    "typescript": "^5.1",
-    "vitest": "^0.33.0"
-  },
-  "license": "Apache-2.0",
-  "dependencies": {
-    "envalid": "^7.3.1",
-    "fastify": "^4.19.2",
-    "fastify-type-provider-zod": "^1.1.9",
-    "pino-cloud-logging": "^1.0.6"
+  "volta": {
+    "node": "18.16.1"
   }
 }
