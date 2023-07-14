@@ -21,8 +21,10 @@ jobs:
         app:
           - name: event-handler
             container-file: ./apps/event-handler/Containerfile
+            cache-from: type=gha
           - name: frontend
             container-file: ./apps/frontend/Containerfile
+            
 
     env:
       REGISTRY: ghcr.io
@@ -64,5 +66,5 @@ jobs:
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
+          cache-from: ${{ matrix.app.cache-from }}
           cache-to: type=gha,mode=max

@@ -28,6 +28,7 @@ jobs:
         app:
           - name: event-handler
             container-file: ./apps/event-handler/Containerfile
+            cache-from: type=gha
           - name: frontend
             container-file: ./apps/frontend/Containerfile
 
@@ -71,7 +72,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
+          cache-from: ${{ matrix.app.cache-from }}
           cache-to: type=gha,mode=max
 
       # Sign the resulting Docker image digest except on PRs.
