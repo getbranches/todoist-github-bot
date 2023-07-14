@@ -48,11 +48,11 @@ jobs:
         # One build for each app
         app:
           - name: event-handler
-            container-file: Containerfile
+            container-file: ./apps/event-handler/Containerfile
 
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ghcr.io/todoist-github-bot/todoist-github-bot-${{ matrix.app.name }}
+      IMAGE_NAME: ghcr.io/todoist-github-bot/gh-todoist-${{ matrix.app.name }}
       IS_DEFAULT_BRANCH:
         ${{ github.ref == format('refs/heads/{0}',
         github.event.repository.default_branch) }}
@@ -85,11 +85,9 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./
-          file: ./container-files/${{ matrix.app.container-file }}
+          file: ${{ matrix.app.container-file }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            appScope=${{ matrix.app.name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

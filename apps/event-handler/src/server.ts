@@ -1,11 +1,11 @@
-import { FastifyInstance, fastify } from 'fastify';
+import { type FastifyInstance, fastify } from 'fastify';
 import { gcpLogOptions } from 'pino-cloud-logging';
 import { config } from './config.js';
 import { gitHubWebhooks } from './domain/github-webhooks.js';
 
 interface MakeServerResponse {
   app: FastifyInstance;
-  listen: () => void;
+  listen: () => Promise<string>;
 }
 
 export async function makeServer(): Promise<MakeServerResponse> {
@@ -15,11 +15,8 @@ export async function makeServer(): Promise<MakeServerResponse> {
     }),
   });
 
-  app.addHook('onRequest', async req => {
-    req.config = config;
-  });
-
-  app.register(gitHubWebhooks);
+  app.decorateRequest('config', { getter: () => config });
+  await app.register(gitHubWebhooks);
 
   const isGoogleCloudRun = process.env['K_SERVICE'] !== undefined;
 

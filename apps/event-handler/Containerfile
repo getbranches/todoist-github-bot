@@ -10,14 +10,7 @@ WORKDIR /app
 RUN yarn global add turbo
 COPY . .
 
-ARG app
-RUN \
-  if [[ -z "$app" ]] ; \
-  then echo "app argument not provided" && false ; \
-  else echo "Containerfile configured for $app" ; \
-  fi
-
-RUN turbo prune --scope=${app} --docker
+RUN turbo prune --scope=event-handler --docker
 
 FROM node:18-alpine3.16 as builder
 WORKDIR /app
@@ -33,7 +26,7 @@ RUN pnpm install --frozen-lockfile
 
 # Build the app
 COPY --from=base /app/out/full/ .
-RUN pnpm turbo run build --filter=${app}...
+RUN pnpm turbo run build --filter=event-handler...
 
 FROM node:18-alpine3.16 as runner
 WORKDIR /app
@@ -48,4 +41,4 @@ ENV NODE_ENV production
 
 COPY --from=builder /app .
 
-CMD ["node", "apps/${app}/dist/main.js"]
+CMD ["node", "apps/event-handler/dist/main.js"]

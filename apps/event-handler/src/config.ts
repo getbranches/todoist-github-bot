@@ -8,3 +8,5 @@ export const config = cleanEnv(process.env, {
     choices: ['trace', 'debug', 'info', 'warn', 'error', 'fatal'],
   }),
 });
+
+export type Config = Readonly<typeof config>;

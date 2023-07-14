@@ -1,0 +1,23 @@
+version: '3'
+
+tasks:
+  build:
+    deps: [build-event-handler]
+
+  build-event-handler:
+    cmds:
+      - task: build-image
+        vars:
+          APP: event-handler
+
+  build-image:
+    internal: true
+    cmds:
+      - pwd
+      - |
+        # Check if docker exists, if so use it
+        if [ -x "$(command -v docker)" ]; then
+          alias podman=docker
+        fi
+
+        podman build -t {{.APP}} -f apps/{{.APP}}/Containerfile .

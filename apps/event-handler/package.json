@@ -1,5 +1,5 @@
 {
-  "name": "todoist-github-bot",
+  "name": "event-handler",
   "exports": "./dist/main.js",
   "type": "module",
   "volta": {
