@@ -5,3 +5,62 @@ jobs:
   typical-workflow:
     name: Workflow
     uses: bjerkio/workflows/.github/workflows/pnpm-typical.yml@v1
+  
+  build-container:
+    name: Build container
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    strategy:
+      matrix:
+        # One build for each app
+        app:
+          - name: event-handler
+            container-file: ./apps/event-handler/Containerfile
+
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ matrix.app.name }}
+      IS_DEFAULT_BRANCH:
+        ${{ github.ref == format('refs/heads/{0}',
+        github.event.repository.default_branch) }}
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry 🔑
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker meta 🏷
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable=${{ env.IS_DEFAULT_BRANCH }}
+            type=sha,prefix={{branch}}-,priority=1001
+
+      - name: Set up Docker Buildx 🔨
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and Push Container 🛠
+        id: build-and-push
+        uses: docker/build-push-action@v4
+        with:
+          context: ./
+          file: ${{ matrix.app.container-file }}
+          push: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
