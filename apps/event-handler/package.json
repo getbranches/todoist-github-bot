@@ -16,7 +16,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --ext .ts,.tsx",
-    "test": "vitest"
+    "test": "vitest --passWithNoTests"
   },
   "devDependencies": {
     "@bjerk/eslint-config": "^5.0.0",
