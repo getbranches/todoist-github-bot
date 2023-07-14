@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   typical-workflow:
-    name: Typical Workflow
+    name: Workflow
     uses: bjerkio/workflows/.github/workflows/pnpm-typical.yml@v1
 
   todo-to-issue:
@@ -52,7 +52,7 @@ jobs:
 
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ghcr.io/todoist-github-bot/${{ matrix.app.name }}
+      IMAGE_NAME: ghcr.io/todoist-github-bot/todoist-github-bot-${{ matrix.app.name }}
       IS_DEFAULT_BRANCH:
         ${{ github.ref == format('refs/heads/{0}',
         github.event.repository.default_branch) }}
@@ -89,5 +89,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            appScope=${{ matrix.app.name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
