@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "@bjerk/eslint-config",
+    "next/core-web-vitals"
+  ],
+  "parserOptions": {
+    "project": true
+  },
+}

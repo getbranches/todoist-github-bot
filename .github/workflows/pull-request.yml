@@ -21,6 +21,8 @@ jobs:
         app:
           - name: event-handler
             container-file: ./apps/event-handler/Containerfile
+          - name: frontend
+            container-file: ./apps/frontend/Containerfile
 
     env:
       REGISTRY: ghcr.io
