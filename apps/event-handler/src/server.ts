@@ -18,14 +18,12 @@ export async function makeServer(): Promise<MakeServerResponse> {
   app.decorateRequest('config', { getter: () => config });
   await app.register(gitHubWebhooks);
 
-  const isGoogleCloudRun = process.env['K_SERVICE'] !== undefined;
-
   return {
     app,
     listen: () =>
       app.listen({
         port: config.PORT,
-        host: isGoogleCloudRun ? '0.0.0.0' : 'localhost',
+        host: '0.0.0.0',
       }),
   };
 }
