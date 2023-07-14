@@ -19,7 +19,7 @@
     "test": "vitest --passWithNoTests"
   },
   "devDependencies": {
-    "@bjerk/eslint-config": "^5.0.0",
+    "@bjerk/eslint-config": "^5.1.0",
     "@simenandre/prettier": "5.0.0",
     "@tsconfig/esm": "^1.0.4",
     "@tsconfig/node-lts": "^18.12.3",

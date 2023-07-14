@@ -40,8 +40,8 @@ importers:
         version: 1.0.6
     devDependencies:
       '@bjerk/eslint-config':
-        specifier: ^5.0.0
-        version: 5.0.0(@typescript-eslint/eslint-plugin@6.0.0)(@typescript-eslint/parser@6.0.0)(eslint-config-prettier@8.8.0)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-import@2.27.5)(eslint-plugin-promise@6.1.1)(eslint-plugin-unicorn@47.0.0)(eslint@8.44.0)(prettier@3.0.0)
+        specifier: ^5.1.0
+        version: 5.1.0(@typescript-eslint/eslint-plugin@6.0.0)(@typescript-eslint/parser@6.0.0)(eslint-config-prettier@8.8.0)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-import@2.27.5)(eslint-plugin-promise@6.1.1)(eslint-plugin-unicorn@47.0.0)(eslint@8.44.0)(prettier@3.0.0)
       '@simenandre/prettier':
         specifier: 5.0.0
         version: 5.0.0(prettier@3.0.0)
@@ -116,8 +116,8 @@ packages:
       js-tokens: 4.0.0
     dev: true
 
-  /@bjerk/eslint-config@5.0.0(@typescript-eslint/eslint-plugin@6.0.0)(@typescript-eslint/parser@6.0.0)(eslint-config-prettier@8.8.0)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-import@2.27.5)(eslint-plugin-promise@6.1.1)(eslint-plugin-unicorn@47.0.0)(eslint@8.44.0)(prettier@3.0.0):
-    resolution: {integrity: sha512-RIk8DZGycDfsBIzjFZIxFPO6ESIMPEBZJQ2S3RG1Ij80zMD+PbN4mtOmTYUodzdX8GIkW85WpzPNfDgbr5LxQg==}
+  /@bjerk/eslint-config@5.1.0(@typescript-eslint/eslint-plugin@6.0.0)(@typescript-eslint/parser@6.0.0)(eslint-config-prettier@8.8.0)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-import@2.27.5)(eslint-plugin-promise@6.1.1)(eslint-plugin-unicorn@47.0.0)(eslint@8.44.0)(prettier@3.0.0):
+    resolution: {integrity: sha512-ex4ibxgxZG1G6A+EuQYomropsLn0npDOCT+6tYYJcFbfQo/XaqUUjexOgVsPdsTooVDYmvMi5x30WMA93/Rqmw==}
     engines: {node: '>=16'}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': ^6.0.0

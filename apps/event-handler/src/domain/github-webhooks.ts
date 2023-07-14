@@ -1,6 +1,6 @@
-import type { FastifyPluginCallback } from 'fastify';
+import type { FastifyPluginAsync } from 'fastify';
 
-export const gitHubWebhooks: FastifyPluginCallback = server => {
+export const gitHubWebhooks: FastifyPluginAsync = async server => {
   server.route<{ Body: unknown }>({
     method: 'POST',
     url: '/webhook',

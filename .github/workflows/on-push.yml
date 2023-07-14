@@ -122,7 +122,7 @@ jobs:
           event-type: update-tag
           client-payload: |
             {
-              "name": "${{ github.event.repository.name }}-${{ env.IMAGE_NAME }}",
+              "name": "todoist-github-${{ env.IMAGE_NAME }}",
               "tag": "${{ steps.meta.outputs.version }}",
               "repository": "getbranches/${{ github.event.repository.name }}"
             }
