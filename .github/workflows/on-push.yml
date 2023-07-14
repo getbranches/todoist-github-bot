@@ -52,7 +52,7 @@ jobs:
 
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: gh-todoist-${{ matrix.app.name }}
+      IMAGE_NAME: ${{ matrix.app.name }}
       IS_DEFAULT_BRANCH:
         ${{ github.ref == format('refs/heads/{0}',
         github.event.repository.default_branch) }}
