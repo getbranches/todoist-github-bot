@@ -27,10 +27,10 @@ jobs:
         # One build for each app
         app:
           - name: event-handler
-            container-file: ./apps/event-handler/Containerfile
+            container-file: ./apps/event-handler/Dockerfile
             cache-from: type=gha
           - name: frontend
-            container-file: ./apps/frontend/Containerfile
+            container-file: ./apps/frontend/Dockerfile
 
     env:
       REGISTRY: ghcr.io

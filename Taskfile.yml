@@ -28,4 +28,4 @@ tasks:
           alias podman=docker
         fi
 
-        podman build -t {{.APP}} -f apps/{{.APP}}/Containerfile .
+        podman build -t {{.APP}} -f apps/{{.APP}}/Dockerfile .

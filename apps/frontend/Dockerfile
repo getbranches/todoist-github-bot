@@ -37,15 +37,15 @@ USER service-user
 
 ENV NODE_ENV production
 
-COPY --from=builder /app .
+COPY --from=builder /app /app
 
-COPY --from=installer /app/apps/frontend/next.config.js .
-COPY --from=installer /app/apps/frontend/package.json .
+COPY --from=builder /app/apps/frontend/next.config.js .
+COPY --from=builder /app/apps/frontend/package.json .
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/frontend/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/frontend/.next/static ./apps/frontend/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/frontend/public ./apps/frontend/public
+COPY --from=builder --chown=service-user:nodejs /app/apps/frontend/.next/standalone ./
+COPY --from=builder --chown=service-user:nodejs /app/apps/frontend/.next/static ./apps/frontend/.next/static
+COPY --from=builder --chown=service-user:nodejs /app/apps/frontend/public ./apps/frontend/public
 
 CMD ["node", "apps/frontend/server.js"]
