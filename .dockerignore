@@ -1,4 +1,9 @@
-node_modules/*
-out/
-.vscode/
-.github/
+node_modules
+out
+.vscode
+.github
+.git
+**/.next
+**/dist
+**/.turbo
+**/node_modules
