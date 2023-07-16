@@ -81,7 +81,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}
+          images:
+            ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest,enable=${{ env.IS_DEFAULT_BRANCH }}
             type=sha,prefix={{branch}}-,priority=1001
@@ -117,6 +118,21 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [build-container]
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Docker meta 🏷
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: dummy-image
+          tags: type=sha,prefix={{branch}}-,priority=1001
+
       - name: Request tag update 📝
         uses: peter-evans/repository-dispatch@v2
         with:
@@ -125,7 +141,8 @@ jobs:
           event-type: update-tag
           client-payload: |
             {
-              "name": "todoist-github-${{ env.IMAGE_NAME }}",
+              "name": "todoist-github",
               "tag": "${{ steps.meta.outputs.version }}",
-              "repository": "getbranches/${{ github.event.repository.name }}"
+              "repository": "getbranches/${{ github.event.repository.name }}",
+              "kind": "apply-immediate"
             }
