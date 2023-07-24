@@ -3,20 +3,13 @@ version: '3'
 tasks:
   build:
     deps:
-      - build-event-handler
-      - build-frontend
+      - build-server
 
-  build-event-handler:
+  build-server:
     cmds:
       - task: build-image
         vars:
-          APP: event-handler
-
-  build-frontend:
-    cmds:
-      - task: build-image
-        vars:
-          APP: frontend
+          APP: server
 
   build-image:
     internal: true

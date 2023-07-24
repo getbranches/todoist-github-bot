@@ -10,7 +10,7 @@ WORKDIR /app
 RUN yarn global add turbo
 COPY . .
 
-RUN turbo prune --scope=event-handler --docker
+RUN turbo prune --scope=server --docker
 
 FROM node:18-alpine3.16 as builder
 WORKDIR /app
@@ -26,7 +26,7 @@ RUN pnpm install --frozen-lockfile
 
 # Build the app
 COPY --from=base /app/out/full/ .
-RUN pnpm turbo run build --filter=event-handler...
+RUN pnpm turbo run build --filter=server...
 
 FROM node:18-alpine3.16 as runner
 WORKDIR /app
@@ -41,4 +41,4 @@ ENV NODE_ENV production
 
 COPY --from=builder /app .
 
-CMD ["node", "apps/event-handler/dist/main.js"]
+CMD ["node", "packages/server/dist/main.js"]
