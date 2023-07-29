@@ -41,7 +41,7 @@ async function makeServer(name: string): Promise<FastifyInstance> {
 
 export async function makePublicServer(): Promise<FastifyInstance> {
   const app = await makeServer('public');
-  await app.register(eventsPlugin);
+  await app.register(eventsPlugin, { secret: config.WEBHOOK_SECRET });
   return app;
 }
 
