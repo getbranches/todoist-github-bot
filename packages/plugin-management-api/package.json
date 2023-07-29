@@ -1,5 +1,5 @@
 {
-  "name": "plugin-events",
+  "name": "plugin-management-api",
   "version": "0.0.0",
   "type": "module",
   "files": [
