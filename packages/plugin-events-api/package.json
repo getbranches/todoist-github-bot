@@ -8,13 +8,14 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch --preserveWatchOutput",
+    "test": "vitest",
     "lint": "eslint ."
   },
   "dependencies": {
-    "@octokit/webhooks-schemas": "^7.1.0",
-    "reconciler": "workspace:*",
+    "@octokit/webhooks-methods": "^4.0.0",
     "fastify": "^4.19.2",
-    "fastify-plugin": "^4.5.1"
+    "fastify-plugin": "^4.5.1",
+    "reconciler": "workspace:*"
   },
   "devDependencies": {
     "@bjerk/eslint-config": "^5.1.3",
@@ -22,7 +23,8 @@
     "@types/node": "^18",
     "eslint": "^8.43.0",
     "tsconfig": "workspace:*",
-    "typescript": "^5.1.5"
+    "typescript": "^5.1.5",
+    "vitest": "^0.33.0"
   },
   "exports": "./dist/plugin.js",
   "types": "./dist/plugin.d.ts"

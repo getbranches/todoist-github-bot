@@ -1,5 +1,5 @@
 import type { IssuesEvent } from '@octokit/webhooks-types';
-import type { SynchronizeFunctions } from 'synchronize-functions';
+import type { SynchronizeFunctions } from 'utils';
 
 export function isIssuesEvent(
   eventName: string,

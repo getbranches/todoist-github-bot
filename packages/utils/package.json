@@ -1,5 +1,5 @@
 {
-  "name": "synchronize-functions",
+  "name": "utils",
   "version": "0.0.0",
   "type": "module",
   "files": [
@@ -11,8 +11,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "pino": "^8.14.1",
-    "ts-invariant": "^0.10.3"
+    "fastify": "^4.19.2"
   },
   "devDependencies": {
     "@bjerk/eslint-config": "^5.1.3",

@@ -14,7 +14,7 @@
     "pino": "^8.14.1",
     "ts-invariant": "^0.10.3",
     "github-webhook-handler": "workspace:*",
-    "synchronize-functions": "workspace:*"
+    "utils": "workspace:*"
   },
   "devDependencies": {
     "@bjerk/eslint-config": "^5.1.3",

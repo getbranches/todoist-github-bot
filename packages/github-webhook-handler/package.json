@@ -13,7 +13,7 @@
   "dependencies": {
     "pino": "^8.14.1",
     "ts-invariant": "^0.10.3",
-    "synchronize-functions": "workspace:*"
+    "utils": "workspace:*"
   },
   "devDependencies": {
     "@bjerk/eslint-config": "^5.1.3",

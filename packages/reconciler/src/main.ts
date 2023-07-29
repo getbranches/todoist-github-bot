@@ -4,13 +4,13 @@ import {
   handleIssuesEvent,
   isIssuesEvent,
 } from 'github-webhook-handler';
-import { Logger } from 'pino';
 import type {
   AddTodo,
   ID,
+  Logger,
   SynchronizeFunctions,
   Todo,
-} from 'synchronize-functions';
+} from 'utils';
 export { isSupportedEvent } from 'github-webhook-handler';
 
 interface SynchronizeItems {
@@ -61,11 +61,11 @@ function makeSynchronizeFunctions(
   };
 }
 
-export function handleEvent(
+export async function handleEvent(
   eventName: SupportedEvent,
   event: WebhookEvent,
   logger: Logger,
-): void {
+): Promise<void> {
   const { sync, items } = makeSynchronizeFunctions(logger);
   if (isIssuesEvent(eventName, event)) {
     handleIssuesEvent(event, sync);

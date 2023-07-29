@@ -1,7 +1,7 @@
 import type { WebhookEvent } from '@octokit/webhooks-types';
-import type { SynchronizeFunctions } from 'reconciler';
-import { handleIssuesEvent, isIssuesEvent } from './issue-event';
-export * from './issue-event';
+import type { SynchronizeFunctions } from 'utils';
+import { handleIssuesEvent, isIssuesEvent } from './issue-event.js';
+export * from './issue-event.js';
 
 const supportedEvents = ['issues'] as const;
 export type SupportedEvent = (typeof supportedEvents)[number];
