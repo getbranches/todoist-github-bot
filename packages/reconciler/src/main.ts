@@ -4,13 +4,7 @@ import {
   handleIssuesEvent,
   isIssuesEvent,
 } from 'github-webhook-handler';
-import type {
-  AddTodo,
-  ID,
-  Logger,
-  SynchronizeFunctions,
-  Todo,
-} from 'utils';
+import type { AddTodo, ID, Logger, SynchronizeFunctions, Todo } from 'utils';
 export { isSupportedEvent } from 'github-webhook-handler';
 
 interface SynchronizeItems {

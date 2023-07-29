@@ -14,7 +14,7 @@ export function isSupportedEvent(
   }
 
   if (Array.isArray(event)) {
-    return event.every((e) => supportedEvents.includes(e as SupportedEvent));
+    return event.every(e => supportedEvents.includes(e as SupportedEvent));
   }
 
   return false;

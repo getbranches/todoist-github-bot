@@ -1,4 +1,4 @@
-import type { IncomingHttpHeaders } from "http";
+import type { IncomingHttpHeaders } from 'http';
 
 export function getSignature(headers: IncomingHttpHeaders): string | undefined {
   const header = headers['x-hub-signature-256'];
