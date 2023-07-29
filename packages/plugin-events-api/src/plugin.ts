@@ -26,6 +26,8 @@ const plugin: FastifyPluginAsync<EventsPluginOptions> = async (
         return reply.code(400).send();
       }
 
+      request.log.debug({ eventName, signature, body }, 'Received event');
+
       const matchesSignature = await verify(
         opts.secret,
         JSON.stringify(body),
