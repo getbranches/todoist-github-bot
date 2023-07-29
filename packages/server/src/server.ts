@@ -23,6 +23,7 @@ function makeLoggerOptions(name: string) {
 
   return gcpLogOptions({
     level: config.LOG_LEVEL,
+    redact: ['config.WEBHOOK_SECRET'],
     name,
   });
 }
@@ -35,6 +36,8 @@ async function makeServer(name: string): Promise<FastifyInstance> {
 
   await app.register(fastifySensible);
   await app.register(fastifyRateLimit);
+
+  app.log.debug({ config }, 'Server created');
 
   return app;
 }
