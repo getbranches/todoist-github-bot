@@ -22,11 +22,14 @@ const plugin: FastifyPluginAsync<EventsPluginOptions> = async (
       const eventName = getEventName(headers);
       const signature = getSignature(headers);
 
+      request.log.debug(
+        { eventName, signature, body, headers },
+        'Received event',
+      );
+
       if (!isSupportedEvent(eventName) || !signature) {
         return reply.code(400).send();
       }
-
-      request.log.debug({ eventName, signature, body }, 'Received event');
 
       const matchesSignature = await verify(
         opts.secret,
