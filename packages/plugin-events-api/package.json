@@ -26,6 +26,6 @@
     "typescript": "^5.1.5",
     "vitest": "^0.33.0"
   },
-  "exports": "./dist/plugin.js",
-  "types": "./dist/plugin.d.ts"
+  "exports": "./dist/src/plugin.js",
+  "types": "./dist/src/plugin.d.ts"
 }
