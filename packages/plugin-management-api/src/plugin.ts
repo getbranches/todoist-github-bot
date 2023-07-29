@@ -5,7 +5,7 @@ import { fastifyPlugin } from 'fastify-plugin';
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const plugin: FastifyPluginAsync = async (_fastify, _opts) => {};
 
-export const adminPlugin = fastifyPlugin(plugin, {
+export const managementPlugin = fastifyPlugin(plugin, {
   fastify: '4.x',
-  name: 'admin',
+  name: 'management',
 });

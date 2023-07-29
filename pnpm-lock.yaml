@@ -24,7 +24,7 @@ importers:
         specifier: ^1.10.6
         version: 1.10.6
 
-  packages/plugin-admin:
+  packages/plugin-events-api:
     dependencies:
       fastify:
         specifier: ^4.19.2
@@ -49,7 +49,7 @@ importers:
         specifier: ^5.1.5
         version: 5.1.6
 
-  packages/plugin-events:
+  packages/plugin-management-api:
     dependencies:
       fastify:
         specifier: ^4.19.2
@@ -135,12 +135,12 @@ importers:
       eslint:
         specifier: ^8.44.0
         version: 8.44.0
-      plugin-admin:
+      plugin-events-api:
         specifier: workspace:*
-        version: link:../plugin-admin
-      plugin-events:
+        version: link:../plugin-events-api
+      plugin-management-api:
         specifier: workspace:*
-        version: link:../plugin-events
+        version: link:../plugin-management-api
       prettier:
         specifier: ^3.0.0
         version: 3.0.0
