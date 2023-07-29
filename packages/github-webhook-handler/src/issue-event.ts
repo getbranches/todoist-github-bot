@@ -14,13 +14,17 @@ export function handleIssuesEvent(
 ): void {
   if (event.action === 'opened') {
     sync.addTodo({
-      externalId: event.issue.id.toString(),
+      externalId: event.issue.id,
       title: event.issue.title,
     });
   }
 
   if (event.action === 'closed') {
     sync.completeTodo(event.issue.id);
+  }
+
+  if (event.action === 'deleted') {
+    sync.removeTodo(event.issue.id);
   }
 
   if (event.action === 'deleted') {
