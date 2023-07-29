@@ -24,18 +24,61 @@ importers:
         specifier: ^1.10.6
         version: 1.10.6
 
+  packages/github-webhook-handler:
+    dependencies:
+      pino:
+        specifier: ^8.14.1
+        version: 8.14.1
+      synchronize-functions:
+        specifier: workspace:*
+        version: link:../synchronize-functions
+      ts-invariant:
+        specifier: ^0.10.3
+        version: 0.10.3
+    devDependencies:
+      '@bjerk/eslint-config':
+        specifier: ^5.1.3
+        version: 5.2.0(eslint@8.44.0)(prettier@3.0.0)(typescript@5.1.6)
+      '@octokit/webhooks-types':
+        specifier: ^7.1.0
+        version: 7.1.0
+      '@types/node':
+        specifier: ^18
+        version: 18.0.0
+      eslint:
+        specifier: ^8.43.0
+        version: 8.44.0
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsx:
+        specifier: ^3.12.7
+        version: 3.12.7
+      typescript:
+        specifier: ^5.1.5
+        version: 5.1.6
+
   packages/plugin-events-api:
     dependencies:
+      '@octokit/webhooks-schemas':
+        specifier: ^7.1.0
+        version: 7.1.0
       fastify:
         specifier: ^4.19.2
         version: 4.19.2
       fastify-plugin:
         specifier: ^4.5.1
         version: 4.5.1
+      reconciler:
+        specifier: workspace:*
+        version: link:../reconciler
     devDependencies:
       '@bjerk/eslint-config':
         specifier: ^5.1.3
         version: 5.2.0(eslint@8.44.0)(prettier@3.0.0)(typescript@5.1.6)
+      '@octokit/webhooks-types':
+        specifier: ^7.1.0
+        version: 7.1.0
       '@types/node':
         specifier: ^18
         version: 18.0.0
@@ -76,9 +119,15 @@ importers:
 
   packages/reconciler:
     dependencies:
+      github-webhook-handler:
+        specifier: workspace:*
+        version: link:../github-webhook-handler
       pino:
         specifier: ^8.14.1
         version: 8.14.1
+      synchronize-functions:
+        specifier: workspace:*
+        version: link:../synchronize-functions
       ts-invariant:
         specifier: ^0.10.3
         version: 0.10.3
@@ -156,6 +205,37 @@ importers:
       vitest:
         specifier: ^0.33.0
         version: 0.33.0
+
+  packages/synchronize-functions:
+    dependencies:
+      pino:
+        specifier: ^8.14.1
+        version: 8.14.1
+      ts-invariant:
+        specifier: ^0.10.3
+        version: 0.10.3
+    devDependencies:
+      '@bjerk/eslint-config':
+        specifier: ^5.1.3
+        version: 5.2.0(eslint@8.44.0)(prettier@3.0.0)(typescript@5.1.6)
+      '@octokit/webhooks-types':
+        specifier: ^7.1.0
+        version: 7.1.0
+      '@types/node':
+        specifier: ^18
+        version: 18.0.0
+      eslint:
+        specifier: ^8.43.0
+        version: 8.44.0
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsx:
+        specifier: ^3.12.7
+        version: 3.12.7
+      typescript:
+        specifier: ^5.1.5
+        version: 5.1.6
 
   packages/tsconfig:
     dependencies:
@@ -772,6 +852,10 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@octokit/webhooks-schemas@7.1.0:
+    resolution: {integrity: sha512-RpZQDy2RZMV3UW+msjvia+lDYt3Pzoo1ivFLEi+Sf+xUdAtiTz8igAhktBddHKl6eZ4bvrB68wxQOOFbbE3n7A==}
+    dev: false
 
   /@octokit/webhooks-types@7.1.0:
     resolution: {integrity: sha512-y92CpG4kFFtBBjni8LHoV12IegJ+KFxLgKRengrVjKmGE5XMeCuGvlfRe75lTRrgXaG6XIWJlFpIDTlkoJsU8w==}
