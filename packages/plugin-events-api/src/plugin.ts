@@ -1,14 +1,48 @@
+import { verify } from '@octokit/webhooks-methods';
+import type { WebhookEvent } from '@octokit/webhooks-types';
 import type { FastifyPluginAsync } from 'fastify';
 import { fastifyPlugin } from 'fastify-plugin';
+import { handleEvent, isSupportedEvent } from 'reconciler';
+import { getEventName, getSignature } from './utils.js';
 
-const plugin: FastifyPluginAsync = async (fastify, _opts) => {
-  fastify.route<{ Body: unknown }>({
+export interface EventsPluginOptions {
+  secret: string;
+}
+
+const plugin: FastifyPluginAsync<EventsPluginOptions> = async (
+  fastify,
+  opts,
+) => {
+  fastify.route<{ Body: WebhookEvent }>({
     method: 'POST',
     url: '/webhook',
-    handler: (request, reply) => {
-      const { body } = request;
-      request.log.info({ body }, 'Received webhook');
-      return reply.code(204).send();
+    handler: async (request, reply) => {
+      const { body, headers } = request;
+
+      const eventName = getEventName(headers);
+      const signature = getSignature(headers);
+
+      if (!isSupportedEvent(eventName) || !signature) {
+        return reply.code(400).send();
+      }
+
+      const matchesSignature = await verify(
+        opts.secret,
+        JSON.stringify(body),
+        signature,
+      );
+
+      if (!matchesSignature) {
+        return reply.code(401).send();
+      }
+
+      await handleEvent(eventName, body, request.log)
+        .then(() => {
+          return reply.code(204).send();
+        })
+        .catch(() => {
+          return reply.code(500).send();
+        });
     },
   });
 };

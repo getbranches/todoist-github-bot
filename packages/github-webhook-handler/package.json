@@ -1,5 +1,5 @@
 {
-  "name": "reconciler",
+  "name": "github-webhook-handler",
   "version": "0.0.0",
   "type": "module",
   "files": [
@@ -13,7 +13,6 @@
   "dependencies": {
     "pino": "^8.14.1",
     "ts-invariant": "^0.10.3",
-    "github-webhook-handler": "workspace:*",
     "utils": "workspace:*"
   },
   "devDependencies": {
