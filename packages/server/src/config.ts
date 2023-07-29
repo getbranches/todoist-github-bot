@@ -11,4 +11,8 @@ export const config = cleanEnv(process.env, {
   }),
 });
 
+export function makeConfig(): Config {
+  return config;
+}
+
 export type Config = Readonly<typeof config>;

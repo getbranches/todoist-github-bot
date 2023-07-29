@@ -5,13 +5,14 @@ import { type FastifyInstance, fastify } from 'fastify';
 import { gcpLogOptions } from 'pino-cloud-logging';
 import { eventsPlugin } from 'plugin-events-api';
 import { managementPlugin } from 'plugin-management-api';
-import { config } from './config.js';
+import { type Config, makeConfig } from './config.js';
 
-function makeLoggerOptions(name: string) {
+function makeLoggerOptions(name: string, config: Config) {
   if (config.isDevelopment) {
     return {
       level: 'debug',
       name,
+      redact: ['config.WEBHOOK_SECRET'],
       transport: {
         target: 'pino-pretty',
         options: {
@@ -28,28 +29,33 @@ function makeLoggerOptions(name: string) {
   });
 }
 
-async function makeServer(name: string): Promise<FastifyInstance> {
+async function makeServer(
+  name: string,
+  config: Config,
+): Promise<FastifyInstance> {
   const app = fastify({
-    logger: makeLoggerOptions(name),
+    logger: makeLoggerOptions(name, config),
     genReqId: () => randomUUID(),
   });
 
   await app.register(fastifySensible);
   await app.register(fastifyRateLimit);
 
-  app.log.debug({ config }, 'Server created');
+  app.log.debug({ config: { ...config } }, 'Server created');
 
   return app;
 }
 
 export async function makePublicServer(): Promise<FastifyInstance> {
-  const app = await makeServer('public');
+  const config = makeConfig();
+  const app = await makeServer('public', config);
   await app.register(eventsPlugin, { secret: config.WEBHOOK_SECRET });
   return app;
 }
 
 export async function makeManagementServer(): Promise<FastifyInstance> {
-  const app = await makeServer('management');
+  const config = makeConfig();
+  const app = await makeServer('management', config);
   await app.register(managementPlugin);
   return app;
 }
