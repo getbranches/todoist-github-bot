@@ -2,6 +2,7 @@ import { verify } from '@octokit/webhooks-methods';
 import type { WebhookEvent } from '@octokit/webhooks-types';
 import type { FastifyPluginAsync } from 'fastify';
 import { fastifyPlugin } from 'fastify-plugin';
+import fastifyRawBody from 'fastify-raw-body';
 import { handleEvent, isSupportedEvent } from 'reconciler';
 import { getEventName, getSignature } from './utils.js';
 
@@ -13,32 +14,33 @@ const plugin: FastifyPluginAsync<EventsPluginOptions> = async (
   fastify,
   opts,
 ) => {
+  await fastify.register(fastifyRawBody);
+
   fastify.route<{ Body: WebhookEvent }>({
     method: 'POST',
     url: '/webhook',
+    config: { rawBody: true },
+    preHandler: async (request, reply) => {
+      const signature = getSignature(request.headers);
+      if (!signature || !request.rawBody) {
+        return reply.code(401).send();
+      }
+
+      const rawBody = request.rawBody.toString();
+      const matchesSignature = await verify(opts.secret, rawBody, signature);
+
+      if (!matchesSignature) {
+        return reply.code(401).send();
+      }
+    },
     handler: async (request, reply) => {
       const { body, headers } = request;
 
       const eventName = getEventName(headers);
-      const signature = getSignature(headers);
+      request.log.debug({ eventName, body, headers }, 'Received event');
 
-      request.log.debug(
-        { eventName, signature, body, headers },
-        'Received event',
-      );
-
-      if (!isSupportedEvent(eventName) || !signature) {
+      if (!isSupportedEvent(eventName)) {
         return reply.code(400).send();
-      }
-
-      const matchesSignature = await verify(
-        opts.secret,
-        JSON.stringify(body),
-        signature,
-      );
-
-      if (!matchesSignature) {
-        return reply.code(401).send();
       }
 
       await handleEvent(eventName, body, request.log)
