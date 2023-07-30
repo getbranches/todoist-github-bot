@@ -41,7 +41,9 @@ const plugin: FastifyPluginAsync<EventsPluginOptions> = async (
 
       if (!isSupportedEvent(eventName)) {
         request.log.warn({ eventName }, 'Unsupported event received');
-        return reply.code(204).send();
+        return reply.code(200).send({
+          message: 'Unsupported event',
+        });
       }
 
       await handleEvent(eventName, body, request.log)
