@@ -4,7 +4,7 @@ on: [pull_request]
 jobs:
   typical-workflow:
     name: Workflow
-    uses: bjerkio/workflows/.github/workflows/pnpm-typical.yml@v1
+    uses: bjerkio/workflows/.github/workflows/pnpm-typical.yml@v2
 
   build-container:
     name: Build container
