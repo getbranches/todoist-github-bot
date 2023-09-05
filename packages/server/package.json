@@ -19,7 +19,7 @@
     "test": "vitest --passWithNoTests"
   },
   "devDependencies": {
-    "@bjerk/eslint-config": "^5.1.0",
+    "@bjerk/eslint-config": "^6.0.0",
     "@simenandre/prettier": "5.0.0",
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.2",
