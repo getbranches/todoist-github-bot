@@ -15,7 +15,7 @@ permissions:
 jobs:
   typical-workflow:
     name: Workflow
-    uses: bjerkio/workflows/.github/workflows/pnpm-typical.yml@v1
+    uses: bjerkio/workflows/.github/workflows/pnpm-typical.yml@v2
 
   todo-to-issue:
     name: Create issue from TODO comments
