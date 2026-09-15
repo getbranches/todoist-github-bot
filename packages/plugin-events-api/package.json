@@ -19,7 +19,7 @@
     "reconciler": "workspace:*"
   },
   "devDependencies": {
-    "@bjerk/eslint-config": "^5.1.3",
+    "@bjerk/eslint-config": "^6.0.0",
     "@octokit/webhooks-types": "^7.1.0",
     "@types/node": "^18",
     "eslint": "^8.43.0",
